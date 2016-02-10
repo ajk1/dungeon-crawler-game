@@ -1,5 +1,7 @@
 package combat.field.tiles;
 
+import combat.entities.InTile;
+
 /**
  * It's a tile
  * Pretty self-explanatory
@@ -8,7 +10,7 @@ package combat.field.tiles;
  */
 
 public class Tile{	
-	private Object o_inTile;
+	private InTile o_inTile;
 	
 	private int x, y;
 	
@@ -17,10 +19,10 @@ public class Tile{
 		this.y = y;
 	}
 	
-	public Tile(int x, int y, Object ob) {
+	public Tile(int x, int y, InTile ob) {
 		this.x = x;
 		this.y = y;
-		o_inTile = ob;
+		forcePlaceInTile(ob);
 	}
 	
 	public int x() {
@@ -40,8 +42,9 @@ public class Tile{
 	 * in the tile
 	 * @param placee
 	 */
-	public void forcePlaceInTile(Object placee) {
+	public void forcePlaceInTile(InTile placee) {
 		o_inTile = placee;
+		placee.setTile(this);
 	}
 	
 	/**
@@ -53,15 +56,24 @@ public class Tile{
 	 * @param placee	object to be placed
 	 * @return			True if object is placed successfully
 	 */
-	public boolean placeInTile(Object placee) {
+	public boolean placeInTile(InTile placee) {
 		if (o_inTile == null) {
 			o_inTile = placee;
+			Tile temp = placee.getTile();
+			// If the character has been in a tile before
+			if (temp != null)
+				temp.clear();
+			placee.setTile(this);
 			return true;
 		}
 		return false;
 	}
 	
-	public Object getInTile() {
+	public void clear() {
+		o_inTile = null;
+	}
+	
+	public InTile getInTile() {
 		return o_inTile;
 	}
 }

@@ -1,5 +1,7 @@
 package combat.entities;
 
+import combat.field.tiles.Tile;
+
 /**
  * It's an impassable piece of
  * terrain
@@ -16,8 +18,9 @@ package combat.entities;
  * @author Kevin
  *
  */
-public class Wall extends Object{
+public class Wall extends InTile{
 
 	public Wall() {
+		super();
 	}
 }

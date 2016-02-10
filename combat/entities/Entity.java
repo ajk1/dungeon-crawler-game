@@ -21,12 +21,10 @@ public class Entity extends HasHp {
 	 * Object class
 	 */
 	private Field field; 
-	private Tile tile;
 	
-	public Entity(Field field, Tile tile, int hp) {
+	public Entity(Field field, int hp) {
 		super(hp);
 		this.field = field;
-		this.tile = tile;
 	}
 	
 	public void moveLeft() {

@@ -1,5 +1,7 @@
 package combat.field.tiles;
 
+import combat.entities.InTile;
+
 public class TileVoid extends Tile{	
 	
 	public TileVoid(int x, int y) {
@@ -7,15 +9,15 @@ public class TileVoid extends Tile{
 	}
 
 	@Override
-	public void forcePlaceInTile(Object placee) {}
+	public void forcePlaceInTile(InTile placee) {}
 
 	@Override
-	public boolean placeInTile(Object placee) {
+	public boolean placeInTile(InTile placee) {
 		return false;
 	}
 
 	@Override
-	public Object getInTile() {
+	public InTile getInTile() {
 		return null;
 	}
 	

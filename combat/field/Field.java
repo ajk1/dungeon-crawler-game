@@ -1,5 +1,6 @@
 package combat.field;
 
+import combat.entities.InTile;
 import combat.entities.Wall;
 import combat.field.tiles.Tile;
 import combat.field.tiles.TileType;
@@ -28,7 +29,7 @@ public class Field {
 	 * 
 	 * @return		true if successfully placed
 	 */
-	public boolean attemptPlace(Object ob, int x, int y) {
+	public boolean attemptPlace(InTile ob, int x, int y) {
 		try {
 			if (x >= 0 && x < tiles.length && y >= 0 && y < tiles[0].length) {
 				return tiles[x][y].placeInTile(ob);

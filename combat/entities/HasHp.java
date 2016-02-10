@@ -1,5 +1,6 @@
 package combat.entities;
 
+import combat.field.tiles.Tile;
 
 /**
  * Give me a better name
@@ -11,11 +12,12 @@ package combat.entities;
  * @author Kevin
  *
  */
-public class HasHp extends Object{
+public class HasHp extends InTile{
 	private int maxHp;
 	private int hp;
 	
 	public HasHp(int hp) {
+		super();
 		this.maxHp = hp;
 		this.hp = hp;
 	}
