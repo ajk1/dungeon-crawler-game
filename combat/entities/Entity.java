@@ -1,15 +1,15 @@
 package combat.entities;
 
 import combat.field.Field;
+import combat.field.tiles.Tile;
 
 /**
  * Object that moves around
- * and has an HP bar
  * 
  * @author Kevin
  *
  */
-public class Entity extends Object{
+public class Entity extends HasHp {
 	
 	/**
 	 * Reference to the field it exists on
@@ -21,12 +21,27 @@ public class Entity extends Object{
 	 * Object class
 	 */
 	private Field field; 
-
-	private int HP;
+	private Tile tile;
 	
-	public Entity(Field field) {
+	public Entity(Field field, Tile tile, int hp) {
+		super(hp);
 		this.field = field;
+		this.tile = tile;
 	}
 	
+	public void moveLeft() {
+		field.attemptPlace(this, tile.x() - 1, tile.y());
+	}
 	
+	public void moveRight() {
+		field.attemptPlace(this, tile.x() + 1, tile.y());
+	}
+	
+	public void moveUp() {
+		field.attemptPlace(this, tile.x(), tile.y() - 1);
+	}
+	
+	public void moveDown() {
+		field.attemptPlace(this, tile.x(), tile.y() + 1);
+	}
 }

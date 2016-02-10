@@ -1,7 +1,5 @@
 package combat.entities;
 
-import combat.field.Field;
-
 /**
  * Parent class for anything that
  * exists in a tile

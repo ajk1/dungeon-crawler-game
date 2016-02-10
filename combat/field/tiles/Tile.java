@@ -6,11 +6,33 @@ package combat.field.tiles;
  * @author Kevin
  *
  */
-public class Tile implements TileInterface{
+
+public class Tile{	
 	private Object o_inTile;
 	
-	public Tile() {
-		
+	private int x, y;
+	
+	public Tile(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public Tile(int x, int y, Object ob) {
+		this.x = x;
+		this.y = y;
+		o_inTile = ob;
+	}
+	
+	public int x() {
+		return x;
+	}
+	
+	public int y() {
+		return y;
+	}
+	
+	public boolean isEnterable() {
+		return true;
 	}
 	
 	/**
@@ -18,18 +40,27 @@ public class Tile implements TileInterface{
 	 * in the tile
 	 * @param placee
 	 */
-	@Override
-	public void forceSetInTile(Object placee) {
+	public void forcePlaceInTile(Object placee) {
 		o_inTile = placee;
 	}
 	
-	@Override
-	public void setInTile(Object placee) {
-		if (o_inTile == null)
+	/**
+	 * Tries to place an object
+	 * into the tile
+	 * 
+	 * returns true if successful
+	 * 	
+	 * @param placee	object to be placed
+	 * @return			True if object is placed successfully
+	 */
+	public boolean placeInTile(Object placee) {
+		if (o_inTile == null) {
 			o_inTile = placee;
+			return true;
+		}
+		return false;
 	}
 	
-	@Override
 	public Object getInTile() {
 		return o_inTile;
 	}
