@@ -19,6 +19,14 @@ public abstract class InTile implements ObjectInterface {
 	
 	public InTile() {
 	}
+	
+	public int x() {
+		return tile.x();
+	}
+	
+	public int y() {
+		return tile.y();
+	}
 
 	public void setTile(Tile tile) {
 		this.tile = tile;

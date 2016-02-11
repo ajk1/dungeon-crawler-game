@@ -1,7 +1,5 @@
 package combat.entities;
 
-import combat.field.tiles.Tile;
-
 /**
  * It's an impassable piece of
  * terrain

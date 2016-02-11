@@ -1,5 +1,8 @@
 package combat.field;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import combat.entities.InTile;
 import combat.entities.Wall;
 import combat.field.tiles.Tile;
@@ -9,6 +12,7 @@ import combat.field.tiles.TileVoid;
 public class Field {
 
 	private Tile[][] tiles;
+	private List<InTile> objects;
 	
 	/**
 	 * A field contains a bunch of tiles
@@ -16,7 +20,14 @@ public class Field {
 	 * @param height	Height of the field in tiles
 	 */
 	public Field(int width, int height) {
-		tiles = new TileVoid[width][height];
+		tiles = new Tile[width][height];
+		objects = new ArrayList<InTile>();
+	}
+	
+	public Field(int width, int height, String data) {
+		tiles = new Tile[width][height];
+		objects = new ArrayList<InTile>();
+		setField(data);
 	}
 	
 	/**
@@ -32,6 +43,8 @@ public class Field {
 	public boolean attemptPlace(InTile ob, int x, int y) {
 		try {
 			if (x >= 0 && x < tiles.length && y >= 0 && y < tiles[0].length) {
+				if (!objects.contains(ob))
+					objects.add(ob);
 				return tiles[x][y].placeInTile(ob);
 			}
 		}
@@ -40,6 +53,20 @@ public class Field {
 		}
 		catch (IndexOutOfBoundsException e) {
 			System.err.println("Out of bounds of the field\n\te");
+		}
+		return false;
+	}
+	
+	/**
+	 * Removes the object from the field
+	 * 
+	 * @param ob	object to be removed
+	 * @return		false if object does not exist, true otherwise
+	 */
+	public boolean removeObject(InTile ob) {
+		if (objects.contains(ob)) {
+			objects.remove(ob);
+			return true;
 		}
 		return false;
 	}
@@ -76,6 +103,17 @@ public class Field {
 	 *   w g g g g
 	 *   w w w w w"
 	 */
+	/**
+	 * Parses a string
+	 * to set up the field
+	 * 
+	 * Accepted characters:
+	 * 	n	normal tile
+	 * 	v	void tile
+	 * 	w	tile containing a wall
+	 * 
+	 * @param data
+	 */
 	public void setField(String data) {
 		char[] array = data.toCharArray();
 		int x = 0, y = 0;
@@ -109,5 +147,15 @@ public class Field {
 		catch (IndexOutOfBoundsException e) {
 			System.err.println("Out of bounds of the field\n\te");
 		}
+	}
+
+	public Tile getTile(int x, int y) {
+		try {
+			if (x >= 0 && x < tiles.length && y >= 0 && y < tiles[0].length) {
+				return tiles[x][y];
+			}
+		}
+		catch (NullPointerException e) {}
+		return null;
 	}
 }

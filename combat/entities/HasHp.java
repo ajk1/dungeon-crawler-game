@@ -1,7 +1,5 @@
 package combat.entities;
 
-import combat.field.tiles.Tile;
-
 /**
  * Give me a better name
  * 
